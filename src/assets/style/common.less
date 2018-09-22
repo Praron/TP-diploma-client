@@ -1,0 +1,15 @@
+@import "font";
+
+.html, body {
+  height: 100%;
+  display: flex;
+  font: @size-medium @base-font-family;
+}
+
+&._hidden {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+}
