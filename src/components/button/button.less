@@ -1,0 +1,47 @@
+@import '../../assets/style/font';
+@import '../../assets/style/color';
+
+.button {
+  padding: 0 16px;
+
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__text {
+    text-decoration: none;
+    white-space: nowrap;
+    color: #FFFFFF;
+  }
+
+  &._small {
+    height: 25px;
+    font-size: @size-x-small;
+  }
+
+  &._medium {
+    height: 32px;
+    font-size: @size-medium;
+  }
+
+  &._large {
+    height: 40px;
+    font-size: @size-x-large;
+  }
+
+  &._default {
+    background-color: @button-default;
+  }
+
+  &._danger {
+    background-color: @button-danger;
+  }
+
+  &._success {
+    background-color: @button-success;
+  }
+}
