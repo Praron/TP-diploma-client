@@ -38,6 +38,8 @@ export default class Button extends React.Component {
                 return '_danger';
             case 'success':
                 return '_success';
+            case 'link':
+                return '_link';
             default:
                 return '_default';
         }
