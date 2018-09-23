@@ -1,7 +1,12 @@
 import React from 'react';
+import './course.less';
 
 export default class Course extends React.Component {
     render() {
-        return <h1>Course container</h1>;
+        return (
+            <div className='course'>
+
+            </div>
+        );
     }
 }

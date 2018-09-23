@@ -20,12 +20,12 @@ export default class Header extends React.Component {
     }
 
     _getMenuItems() {
-        return MENU_ITEMS.map(item => {
+        return MENU_ITEMS.map((item, index) => {
             const styleItem = `header__menu-item ${
                     item.center ? item.center : ''
                 }`;
 
-            return <li className={styleItem}>
+            return <li className={styleItem} key={index}>
                 {
                     !item.center ?
                     <LinkButton
