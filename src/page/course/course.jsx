@@ -9,10 +9,10 @@ import AddButton from '../../components/add-button/add-button.jsx';
 export default class Course extends React.Component {
     constructor() {
         super();
-        
+
         this.handleClickSave = this.handleClickSave.bind(this);
     }
-    
+
     render() {
         return (
             <div className='course__wrapper'>
@@ -31,9 +31,9 @@ export default class Course extends React.Component {
 
                             <div className='course__time'>
                                 <span className='course__time-text'>Период: c&nbsp;</span>
-                                <input type='date' />
+                                <input type='date'/>
                                 <span className='course__time-text'>&nbsp;до&nbsp;</span>
-                                <input type='date' />
+                                <input type='date'/>
                             </div>
 
                         </section>
@@ -49,7 +49,7 @@ export default class Course extends React.Component {
 
                             <div className='course__time'>
                                 <span className='course__time-text'>Лимит времени:&nbsp;</span>
-                                <input type='date' />
+                                <input type='date'/>
                                 {/*<span className='course__time-text'>&nbsp;до&nbsp;</span>*/}
                                 {/*<input type='date' />*/}
                             </div>
@@ -72,7 +72,7 @@ export default class Course extends React.Component {
                                     <LinkButton
                                         to={`question/${0}`}
                                         text={this.getTruncateText('title', 40)}
-                                        type={'link'}
+                                        style={'link'}
                                     />
                                 </li>
 
@@ -80,7 +80,7 @@ export default class Course extends React.Component {
                                     <LinkButton
                                         to={`question/${1}`}
                                         text={this.getTruncateText('title', 40)}
-                                        type={'link'}
+                                        style={'link'}
                                     />
                                 </li>
 
@@ -88,7 +88,7 @@ export default class Course extends React.Component {
                                     <LinkButton
                                         to={`question/${2}`}
                                         text={this.getTruncateText('title', 40)}
-                                        type={'link'}
+                                        style={'link'}
                                     />
                                 </li>
 
@@ -96,7 +96,7 @@ export default class Course extends React.Component {
                                     <LinkButton
                                         to={`question/${3}`}
                                         text={this.getTruncateText('title', 40)}
-                                        type={'link'}
+                                        style={'link'}
                                     />
                                 </li>
 
@@ -108,21 +108,27 @@ export default class Course extends React.Component {
                     <AddButton size={'medium'}/>
 
                     <footer className='course__footer'>
-                        <Button
-                            text={'Добавить курс'}
-                            handleClick={this.handleClickSave}
-                            type={'default'}
-                        />
 
-                        <Button 
-                            text={'Сохранить'}
-                            handleClick={this.handleClickSave}
-                            type={'success'}
-                        />
+                            <Button
+                                text={'Добавить курс'}
+                                handleClick={this.handleClickSave}
+                                style={'default'}
+                            />
+
+                            <Button
+                                text={'Сохранить'}
+                                handleClick={this.handleClickSave}
+                                style={'success'}
+                            />
+
                     </footer>
 
                 </div>
-                
+
+                <LinkButton
+                    to={'/login'}
+                    text={'страница входа'}
+                />
             </div>
         );
     }
@@ -137,3 +143,4 @@ export default class Course extends React.Component {
         console.log(e);
     }
 }
+

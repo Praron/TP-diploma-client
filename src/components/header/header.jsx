@@ -32,7 +32,7 @@ export default class Header extends React.Component {
                         to={item.pathTo}
                         text={item.text}
                         size={item.size}
-                        type={item.type}
+                        style={item.type}
                     /> : ''
                 }
             </li>;

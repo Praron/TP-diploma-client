@@ -1,16 +1,22 @@
 @import '../../assets/style/font';
 @import '../../assets/style/color';
 
+
 .button {
   padding: 0 16px;
 
   border-radius: 5px;
   cursor: pointer;
   user-select: none;
+  border: none;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  &:disabled {
+    background: @color-button-disabled !important;
+  }
 
   &__text {
     text-decoration: none;
@@ -49,6 +55,7 @@
     padding: 0;
     border-radius: 0;
     color: @color-button-link;
+    background-color: white;
 
     &:hover {
      color: @color-button-link-hover;
