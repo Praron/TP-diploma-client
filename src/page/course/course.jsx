@@ -3,9 +3,9 @@ import './course.less';
 
 import Button from '../../components/button/button.jsx';
 import LinkButton from '../../components/link-button/link-button.jsx';
-import Input from '../../components/input/input.jsx';
 import AddButton from '../../components/add-button/add-button.jsx';
 
+import CourseHeader from '../../components/course-header/course-header.jsx';
 import Card from '../../components/card/card.jsx';
 
 export default class Course extends React.Component {
@@ -21,121 +21,26 @@ export default class Course extends React.Component {
                 
                 <section className='course'>
                     <header className='course__header'>
-                        
-                        <section className='course-header'>
-
-                            <div className='course-header__title'>
-                                <span className='course-header__text'>Курс:&nbsp;</span>
-                                <div className='course-header__input'>
-
-                                    <Input
-                                        type={'text'}
-                                        placeholder={'Введите название курса'}
-                                    />
-
-                                </div>
-                            </div>
-
-                            <div className='course-header__time'>
-                                <span className='course-header__text'>Период: c&nbsp;</span>
-
-                                <Input
-                                    type={'date'}
-                                />
-
-                                <span className='course-header__text'>&nbsp;до&nbsp;</span>
-
-                                <Input
-                                    type={'date'}
-                                />
-
-                            </div>
-
-                        </section>
-                        
+                        <CourseHeader
+                            titleLeft={'Курс:'}
+                            placeholderLeft={'Название курса:'}
+                            withPeriod={true}
+                        />
                     </header>
                     
                     <main className='course__test'>
                         <div className='course__test-header'>
 
-                            <section className='course-header'>
+                            <CourseHeader
+                                titleLeft={'Tecт:'}
+                                placeholderLeft={'Название теста'}
+                                withPerion={false}
+                            />
 
-                                <div className='course-header__title'>
-                                    <span className='course-header__text'>Тест:&nbsp;</span>
-                                    <div className='course-header__input'>
-
-                                        <Input
-                                            type={'text'}
-                                            placeholder={'Введите название теста'}
-                                        />
-
-                                    </div>
-                                </div>
-
-                                <div className='course-header__time'>
-                                    <span className='course-header__text'>Лимит времени:&nbsp;</span>
-
-                                    <Input
-                                        type={'time'}
-                                    />
-
-                                </div>
-
-                            </section>
-                            
                         </div>
                         <div className='course__test-card'>
 
-
                             <Card />
-                                {/*<div className='card'>*/}
-                                    {/*<div className='card__input'>*/}
-
-                                        {/*<Input*/}
-                                            {/*type={'text'}*/}
-                                            {/*placeholder={'Введите категорию вопроса'}*/}
-                                        {/*/>*/}
-
-                                    {/*</div>*/}
-
-                                    {/*<ul className='card__question'>*/}
-
-                                        {/*<li className='card__question-item'>*/}
-                                            {/*<LinkButton*/}
-                                                {/*to={`question/${0}`}*/}
-                                                {/*text={this.getTruncateText('title', 40)}*/}
-                                                {/*style={'link'}*/}
-                                            {/*/>*/}
-                                        {/*</li>*/}
-
-                                        {/*<li className='card__question-item'>*/}
-                                            {/*<LinkButton*/}
-                                                {/*to={`question/${1}`}*/}
-                                                {/*text={this.getTruncateText('title', 40)}*/}
-                                                {/*style={'link'}*/}
-                                            {/*/>*/}
-                                        {/*</li>*/}
-
-                                        {/*<li className='card__question-item'>*/}
-                                            {/*<LinkButton*/}
-                                                {/*to={`question/${2}`}*/}
-                                                {/*text={this.getTruncateText('title', 40)}*/}
-                                                {/*style={'link'}*/}
-                                            {/*/>*/}
-                                        {/*</li>*/}
-
-                                        {/*<li className='card__question-item'>*/}
-                                            {/*<LinkButton*/}
-                                                {/*to={`question/${3}`}*/}
-                                                {/*text={this.getTruncateText('title', 40)}*/}
-                                                {/*style={'link'}*/}
-                                            {/*/>*/}
-                                        {/*</li>*/}
-                                    {/*</ul>*/}
-
-                                    {/*<AddButton size={'small'}/>*/}
-
-                                {/*</div>*/}
 
                         </div>
 
@@ -170,8 +75,8 @@ export default class Course extends React.Component {
         );
     }
 
-    handleClickSave(e) {
-        console.log(e);
+    handleClickSave() {
+
     }
 }
 

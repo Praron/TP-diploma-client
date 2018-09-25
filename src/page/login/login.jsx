@@ -92,8 +92,6 @@ export default class Login extends React.Component {
         const value = e.currentTarget.value;
         const fieldName = e.currentTarget.dataset.fieldName;
 
-        console.log(this.state, value, fieldName);
-
         this.setState({
             [fieldName]: value
         });

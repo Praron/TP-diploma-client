@@ -49,7 +49,7 @@ export default class Card extends React.Component {
     
     _getListQuestion() {
         return this.state.questions.map(question =>
-            <li className='card__question-item'>
+            <li className='card__question-item' key={question.id}>
                 <LinkButton
                     to={`question/${question.id}`}
                     text={this.getTruncateText(question.title, 40)}

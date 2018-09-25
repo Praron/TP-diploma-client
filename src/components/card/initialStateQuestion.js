@@ -1,4 +1,10 @@
+// TODO перенести в store
+
 export const questions = [
+    {
+        id: 0,
+        title: 'title'
+    },
     {
         id: 1,
         title: 'title'
@@ -13,10 +19,6 @@ export const questions = [
     },
     {
         id: 4,
-        title: 'title'
-    },
-    {
-        id: 5,
         title: 'title'
     }
 ];

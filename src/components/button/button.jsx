@@ -10,8 +10,6 @@ export default class Button extends React.Component {
         const typeStyle = this._getStyle(style);
         const className = `button ${sizeStyle} ${typeStyle}`;
 
-        console.log('Button', isDisabled);
-
         return (
             <button
                 className={className}
