@@ -2,6 +2,9 @@ import React from 'react';
 import './login.less';
 
 import Button from '../../components/button/button.jsx';
+import Input from '../../components/input/input.jsx';
+
+//TODO доделать вывод ошибок с сервера и ошибки формы
 
 export default class Login extends React.Component {
     constructor() {
@@ -20,7 +23,6 @@ export default class Login extends React.Component {
     render() {
         const {email, password} = this.state;
         const isDisabled = this.validate();
-        console.log(isDisabled);
 
         return (
             <div className='login'>
@@ -30,21 +32,21 @@ export default class Login extends React.Component {
                 <form className='login__form' onSubmit={this.handleSubmit}>
 
                     <div className='login__form-input'>
-                        <input
-                            data-field-name={'email'}
-                            type={'text'}
-                            onChange={this.handleChange}
+                        <Input
+                            type={'email'}
+                            fieldName={'email'}
                             placeholder={'Почта'}
+                            handleChange={this.handleChange}
                             value={email}
                         />
                     </div>
 
                     <div className='login__form-input'>
-                        <input
-                            data-field-name={'password'}
-                            type={'text'}
-                            onChange={this.handleChange}
+                        <Input
+                            type={'password'}
+                            fieldName={'password'}
                             placeholder={'Пароль'}
+                            handleChange={this.handleChange}
                             value={password}
                         />
                     </div>
@@ -74,9 +76,7 @@ export default class Login extends React.Component {
     }
 
     validate() {
-        const { email, password } = this.state;
-
-        console.log('validate', email, password);
+        const {email, password} = this.state;
 
         if (!this.testPassword(password)) {
             return false;
@@ -91,6 +91,8 @@ export default class Login extends React.Component {
     handleChange(e) {
         const value = e.currentTarget.value;
         const fieldName = e.currentTarget.dataset.fieldName;
+
+        console.log(this.state, value, fieldName);
 
         this.setState({
             [fieldName]: value

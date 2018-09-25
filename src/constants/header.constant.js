@@ -13,7 +13,7 @@ export const MENU_ITEMS = [
         pathTo: COURSE,
     },
     {
-        text: 'Проверить видео',
+        text: 'Проверить тесты',
         size: 'medium',
         type: 'default',
         pathTo: VIDEO,
