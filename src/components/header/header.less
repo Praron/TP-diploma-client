@@ -1,0 +1,23 @@
+@import '../../assets/style/color';
+
+.header {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: @header-background-color;
+
+  &__menu {
+    display: flex;
+    width: 800px;
+
+    &-item {
+      margin: 5px 10px;
+
+      &._center {
+        flex-grow: 1;
+      }
+    }
+
+  }
+}

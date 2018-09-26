@@ -1,0 +1,35 @@
+@import "../../assets/style/color";
+@import "../../assets/style/font";
+
+.course-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  margin: 10px 0;
+
+  &__title {
+    display: flex;
+    align-items: center;
+  }
+
+  &__text {
+    font-size: @size-large;
+  }
+
+  &__time {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.footer {
+  display: flex;
+  margin-top: 20px;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  & > button {
+    margin-left: 20px;
+  }
+}
