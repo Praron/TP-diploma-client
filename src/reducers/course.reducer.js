@@ -3,7 +3,7 @@ import {GET_COURSE} from '../actions/actions-types';
 const initialState = {
     courses: [
         {
-            name: 'Курс1',
+            name: 'Опросник1',
             tests: [
                 {
                     name: 'Тест1',
@@ -49,7 +49,7 @@ const initialState = {
             ]
         },
         {
-            name: 'Курс2',
+            name: 'Опросник2',
             tests: [
                 {
                     name: 'Тест1',

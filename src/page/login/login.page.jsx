@@ -1,12 +1,12 @@
 import React from 'react';
-import './login.less';
+import './login.page.less';
 
 import Button from '../../components/button/button.jsx';
 import Input from '../../components/input/input.jsx';
 
 //TODO доделать вывод ошибок с сервера и ошибки формы
 
-export default class Login extends React.Component {
+export default class LoginPage extends React.Component {
     constructor() {
         super();
 

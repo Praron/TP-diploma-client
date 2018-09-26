@@ -1,5 +1,5 @@
 import React from 'react';
-import './question.less';
+import './question.page.less';
 import Input from '../../components/input/input.jsx';
 import Select from '../../components/select/select.jsx';
 import PropTypes from 'prop-types';
@@ -11,7 +11,7 @@ import AnswersItem from '../../components/answers/answers-item/answers-item.jsx'
 import Button from '../../components/button/button.jsx';
 
 
-export default class Question extends React.Component {
+export default class QuestionPage extends React.Component {
     constructor() {
         super();
 
@@ -150,7 +150,7 @@ export default class Question extends React.Component {
     }
 }
 
-Question.propTypes = {
+QuestionPage.propTypes = {
     match: PropTypes.object,
 };
 

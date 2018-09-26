@@ -1,16 +1,16 @@
 import {
     VIDEO,
-    COURSE,
+    INQUIRER,
     RESULT,
     LOGOUT
 } from '../constants/routes-map.constant';
 
 export const MENU_ITEMS = [
     {
-        text: 'Курсы',
+        text: 'Опросник',
         size: 'medium',
         type: 'default',
-        pathTo: COURSE,
+        pathTo: INQUIRER ,
     },
     {
         text: 'Проверить тесты',

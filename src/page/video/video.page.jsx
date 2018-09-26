@@ -3,10 +3,10 @@ import React from 'react';
 import Select from '../../components/select/select.jsx';
 import Button from '../../components/button/button.jsx';
 
-import './video.less';
+import './video.page.less';
 //TODO разбить на компоненты
 
-export default class Video extends React.Component {
+export default class VideoPage extends React.Component {
     constructor() {
         super();
 

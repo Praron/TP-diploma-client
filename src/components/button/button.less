@@ -9,6 +9,7 @@
   cursor: pointer;
   user-select: none;
   border: none;
+  outline: none;
 
   display: flex;
   flex-direction: column;
@@ -41,6 +42,10 @@
 
   &._default {
     background-color: @button-default;
+
+    &:hover {
+      background-color: @button-default-hover;
+    }
   }
 
   &._danger {
@@ -49,6 +54,10 @@
 
   &._success {
     background-color: @button-success;
+
+    &:hover {
+      background-color: @button-success-hover;
+    }
   }
 
   &._link > span, &._link {

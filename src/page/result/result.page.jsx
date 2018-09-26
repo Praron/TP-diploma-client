@@ -1,9 +1,9 @@
 import React from 'react';
 import Table from '../../components/table/table.jsx';
 
-import './result.less';
+import './result.page.less';
 
-export default class Result extends React.Component {
+export default class ResultPage extends React.Component {
     render() {
 
         const data = [

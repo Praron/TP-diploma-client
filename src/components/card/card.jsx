@@ -4,8 +4,8 @@ import './card.less';
 
 import Input from '../input/input.jsx';
 import LinkButton from '../link-button/link-button.jsx';
-import AddButton from '../add-button/add-button.jsx';
 import {questions} from './initialStateQuestion';
+import Button from '../button/button.jsx';
 
 export default class Card extends React.Component {
     constructor() {
@@ -35,7 +35,12 @@ export default class Card extends React.Component {
                     {questionsTitle}
                 </ul>
 
-                <AddButton size={'small'}/>
+                <div className='card__button'>
+                    <Button
+                        text={'Добавить вопрос'}
+                        style={'default'}
+                    />
+                </div>
 
             </div>
         );
