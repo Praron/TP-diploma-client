@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 export default class CourseHeader extends React.Component {
 
     render() {
-        const {titleLeft, placeholderLeft, withPeriod} = this.props;
-        const timeBlock = this._getTimeBlock(withPeriod);
+        const {titleLeft, placeholderLeft, withPeriod, startTime, endTime, limitTime} = this.props;
+        const timeBlock = this._getTimeBlock(withPeriod, startTime, endTime, limitTime);
 
         return (
 
@@ -32,7 +32,8 @@ export default class CourseHeader extends React.Component {
     }
 
 
-    _getTimeBlock(withPeriod) {
+    _getTimeBlock(withPeriod, startTime, endTime, limitTime) {
+        console.log(limitTime);
         if (withPeriod) {
             return (
                 <div className='course-header__time'>
@@ -41,14 +42,14 @@ export default class CourseHeader extends React.Component {
 
                     <Input
                         type={'date'}
-                        // value={}
+                        value={startTime}
                     />
 
                     <span className='course-header__text'>&nbsp;до&nbsp;</span>
 
                     <Input
                         type={'date'}
-                        // value={}
+                        value={endTime}
                     />
 
                 </div>
@@ -61,15 +62,18 @@ export default class CourseHeader extends React.Component {
 
                 <Input
                     type={'time'}
+                    value={limitTime}
                 />
             </div>
         );
     }
-
 }
 
 CourseHeader.propTypes = {
     titleLeft: PropTypes.string.isRequired,
     placeholderLeft: PropTypes.string.isRequired,
     withPeriod: PropTypes.bool,
+    startTime: PropTypes.string,
+    endTime: PropTypes.string,
+    limitTime: PropTypes.string
 };

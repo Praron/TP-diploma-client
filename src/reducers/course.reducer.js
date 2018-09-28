@@ -57,7 +57,7 @@ export default function course(state = initialState, action) {
         case COURSE_SUCCESS:
             return {
                 ...state,
-                courses: state.courses.push(action.payload),
+                courses: action.payload,
                 isLoadingCourse: false
             };
 

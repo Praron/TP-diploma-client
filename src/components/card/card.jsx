@@ -1,24 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './card.less';
 
 import Input from '../input/input.jsx';
 import LinkButton from '../link-button/link-button.jsx';
-import {questions} from './initialStateQuestion';
 import Button from '../button/button.jsx';
 
-export default class Card extends React.Component {
-    constructor() {
-        super();
 
-        this.state = {
-            questions: questions,
-        };
-    }
+export default class Card extends React.Component {
 
     render() {
 
-        const questionsTitle = this._getListQuestion();
+        const {categoryTitle} = this.props;
+
+        const questionsBlock = this._getListQuestion();
 
         return (
             <div className='card'>
@@ -26,13 +22,13 @@ export default class Card extends React.Component {
 
                     <Input
                         type={'text'}
-                        placeholder={'Введите категорию вопроса'}
+                        placeholder={categoryTitle || 'Введите категорию вопроса'}
                     />
 
                 </div>
 
                 <ul className='card__question'>
-                    {questionsTitle}
+                    {questionsBlock}
                 </ul>
 
                 <div className='card__button'>
@@ -53,14 +49,20 @@ export default class Card extends React.Component {
     }
     
     _getListQuestion() {
-        return this.state.questions.map(question =>
-            <li className='card__question-item' key={question.id}>
+        return this.props.questions.map(({questionId, questionTitle}) =>
+            <li className='card__question-item' key={questionId}>
                 <LinkButton
-                    to={`question/${question.id}`}
-                    text={this.getTruncateText(question.title, 40)}
+                    to={`question/${questionId}`}
+                    text={this.getTruncateText(questionTitle, 40)}
                     style={'link'}
                 />
             </li>
         );
     }
 }
+
+
+Card.propTypes = {
+    categoryTitle: PropTypes.string,
+    questions: PropTypes.array
+};

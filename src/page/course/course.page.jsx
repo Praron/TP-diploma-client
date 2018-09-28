@@ -7,18 +7,24 @@ import {getCourse} from '../../actions/course.action';
 import {connect} from 'react-redux';
 
 class CoursePage extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.handleClickSave = this.handleClickSave.bind(this);
         this.handleAddCourse = this.handleAddCourse.bind(this);
+
+        this.props.getCourse();
     }
 
     render() {
+        const {courses} = this.props;
+
+        const coursesBlock = this._getCourse(courses);
+
         return (
             <div className='container'>
 
-                <Course />
+                {coursesBlock}
 
                 <footer className='footer'>
 
@@ -39,6 +45,18 @@ class CoursePage extends React.Component {
         );
     }
 
+    _getCourse(courses) {
+        return courses.map(({inquirerId, inquirerTitle, inquirerStartTime, inquirerEndTime, tests}) => (
+            <Course
+                key={inquirerId}
+                inquirerTitle={inquirerTitle}
+                inquirerStartTime={inquirerStartTime}
+                inquirerEndTime={inquirerEndTime}
+                tests={tests}
+            />
+        ));
+    }
+
     handleClickSave() {
 
     }
@@ -50,8 +68,8 @@ class CoursePage extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        courses: state.login.courses,
-        isLoading: state.login.isLoading
+        courses: state.course.courses,
+        isLoading: state.course.isLoading
     };
 }
 
