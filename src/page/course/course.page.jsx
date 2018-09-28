@@ -2,26 +2,29 @@ import React from 'react';
 import './course.page.less';
 
 import Button from '../../components/button/button.jsx';
-import LinkButton from '../../components/link-button/link-button.jsx';
 import Course from '../../components/course/course.jsx';
+import {getCourse} from '../../actions/course.action';
+import {connect} from 'react-redux';
 
-export default class CoursePage extends React.Component {
+class CoursePage extends React.Component {
     constructor() {
         super();
 
         this.handleClickSave = this.handleClickSave.bind(this);
+        this.handleAddCourse = this.handleAddCourse.bind(this);
     }
 
     render() {
         return (
             <div className='container'>
+
                 <Course />
 
                 <footer className='footer'>
 
                     <Button
                         text={'Добавить курс'}
-                        handleClick={this.handleClickSave}
+                        handleClick={this.handleAddCourse}
                         style={'default'}
                     />
 
@@ -32,12 +35,6 @@ export default class CoursePage extends React.Component {
                     />
 
                 </footer>
-
-                <LinkButton
-                    to={'/login'}
-                    text={'страница входа'}
-                />
-
             </div>
         );
     }
@@ -45,5 +42,21 @@ export default class CoursePage extends React.Component {
     handleClickSave() {
 
     }
+
+    handleAddCourse() {
+
+    }
 }
 
+function mapStateToProps(state) {
+    return {
+        courses: state.login.courses,
+        isLoading: state.login.isLoading
+    };
+}
+
+const mapDispatchToProps = (dispatch) => ({
+    getCourse: (params) => dispatch(getCourse(params))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CoursePage);

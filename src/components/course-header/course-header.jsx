@@ -41,12 +41,14 @@ export default class CourseHeader extends React.Component {
 
                     <Input
                         type={'date'}
+                        // value={}
                     />
 
                     <span className='course-header__text'>&nbsp;до&nbsp;</span>
 
                     <Input
                         type={'date'}
+                        // value={}
                     />
 
                 </div>

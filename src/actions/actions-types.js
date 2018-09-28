@@ -3,3 +3,7 @@ export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
 export const LOG_IN_FAILURE = 'LOG_IN_FAILURE';
 export const LOG_OUT = 'LOG_OUT';
 export const LOG_IN_ERROR_SERVER = 'LOG_IN_ERROR_SERVER';
+
+export const COURSE_REQUEST = 'COURSE_REQUEST';
+export const COURSE_SUCCESS = 'COURSE_SUCCESS';
+export const COURSE_ERROR_SERVER = 'COURSE_ERROR_SERVER';

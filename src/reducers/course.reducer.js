@@ -1,79 +1,74 @@
-import {GET_COURSE} from '../actions/actions-types';
+import {
+    COURSE_REQUEST,
+    COURSE_SUCCESS,
+    COURSE_ERROR_SERVER
+} from './../actions/actions-types';
 
 const initialState = {
+    isLoading: false,
     courses: [
-        {
-            name: 'Опросник1',
-            tests: [
-                {
-                    name: 'Тест1',
-                    categories: [
-                        {
-                            name: 'Категория1',
-                            issues: [
-                                'Сколько время на Марсе?',
-                                'Почему океан глубокий',
-                                'Сколько зубов у птиц'
-                            ]
-                        },
-                        {
-                            name: 'Категория2',
-                            issues: [
-                                'Сколько время на Марсе?',
-                                'Почему океан глубокий',
-                                'Сколько зубов у птиц'
-                            ]
-                        },
-                        {
-                            name: 'Категория3',
-                            issues: [
-                                'Сколько время на Марсе?',
-                                'Почему океан глубокий',
-                            ]
-                        },
-                    ]
-                },
-                {
-                    name: 'Тест2',
-                    categories: [
-                        {
-                            name: 'Категория1',
-                            issues: [
-                                'Сколько время на Марсе?',
-                                'Почему океан глубокий',
-                                'Сколько зубов у птиц'
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            name: 'Опросник2',
-            tests: [
-                {
-                    name: 'Тест1',
-                    categories: [
-                        {
-                            name: 'Категория1',
-                            issues: [
-                                'Сколько время на Марсе?',
-                                'Почему океан глубокий',
-                                'Сколько зубов у птиц'
-                            ]
-                        }
-                    ]
-                }
-            ]
-        }
-    ],
+        // {
+        //     inquirerId: 0,
+        //     inquirerTitle: 'Опросник1',
+        //     inquirerStartTime: '2018-07-22',
+        //     inquirerEndTime: '2018-08-22',
+        //
+        //     tests: [
+        //         {
+        //             testId: 0,
+        //             testTitle: 'Тест1',
+        //             timeLimit: '0:40',
+        //
+        //             categories: [
+        //                 {
+        //                     categoryId: 0,
+        //                     categoryTitle: 'Категория1',
+        //
+        //                     questions: [
+        //                         {
+        //                             questionId: 0,
+        //                             questionTitle: 'Сколько время на Марсе?'
+        //                         },
+        //                         {
+        //                             questionId: 1,
+        //                             questionTitle: 'Почему океан глубокий'
+        //                         },
+        //                         {
+        //                             questionId: 2,
+        //                             questionTitle: 'Сколько зубов у птиц'
+        //                         }
+        //                     ]
+        //                 }
+        //             ]
+        //         }
+        //     ]
+        // }
+    ]
 };
 
-export default function document(state = initialState, action) {
+export default function course(state = initialState, action) {
     switch (action.type) {
-        case GET_COURSE:
+        case COURSE_REQUEST:
+            return {
+                ...state,
+                isLoadingCourse: true,
+            };
+
+        case COURSE_SUCCESS:
+            return {
+                ...state,
+                courses: state.courses.push(action.payload),
+                isLoadingCourse: false
+            };
+
+        case COURSE_ERROR_SERVER:
+            return {
+                ...state,
+                errorMsg: action.payload,
+                isLoadingCourse: false,
+            };
+
+        default:
             return state;
     }
-
-    return state;
 }

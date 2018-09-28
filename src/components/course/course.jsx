@@ -12,6 +12,7 @@ export default class Course extends React.Component {
         return (
             <div className='course'>
                 <header className='course__header'>
+
                     <CourseHeader
                         titleLeft={'Опросник:'}
                         placeholderLeft={'Название опросника:'}
