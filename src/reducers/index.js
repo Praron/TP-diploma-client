@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
-import course from './course.reducer';
+import login from './login.reducer';
 
 const reducer = combineReducers({
-    course
+    login
 });
 
 export default reducer;

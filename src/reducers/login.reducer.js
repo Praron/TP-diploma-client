@@ -1,0 +1,54 @@
+import {
+    LOG_IN_REQUEST,
+    LOG_IN_SUCCESS,
+    LOG_IN_FAILURE,
+    LOG_OUT,
+    LOG_IN_ERROR_SERVER
+} from '../actions/actions-types';
+
+const initialState = {
+    user: null,
+    isAuth: false,
+    errorMsg: null,
+    isLoading: false,
+};
+
+export default function login(state = initialState, action) {
+    switch (action.type) {
+        case LOG_IN_REQUEST:
+            return {
+                ...state,
+                user: null,
+                isLoading: true,
+                errorMsg: null,
+                isAuth: false
+            };
+        case LOG_IN_SUCCESS:
+            return {
+                ...state,
+                user: action.payload,
+                errorMsg: null,
+                isAuth: true
+            };
+        case LOG_OUT:
+            return {
+                ...state,
+                user: null,
+                errorMsg: null,
+                isAuth: false,
+            };
+        case LOG_IN_FAILURE:
+            return {
+                ...state,
+                errorMsg: action.payload,
+                isAuth: false,
+            };
+        case LOG_IN_ERROR_SERVER:
+            return {
+                ...state,
+                isLoadingUser: false,
+                errorMsgUser: action.payload.errorMsg,
+                isAuth: false
+            };
+    }
+}
