@@ -5,45 +5,8 @@ import {
 } from './../actions/actions-types';
 
 const initialState = {
-    isLoading: false,
-    courses: [
-        // {
-        //     inquirerId: 0,
-        //     inquirerTitle: 'Опросник1',
-        //     inquirerStartTime: '2018-07-22',
-        //     inquirerEndTime: '2018-08-22',
-        //
-        //     tests: [
-        //         {
-        //             testId: 0,
-        //             testTitle: 'Тест1',
-        //             timeLimit: '0:40',
-        //
-        //             categories: [
-        //                 {
-        //                     categoryId: 0,
-        //                     categoryTitle: 'Категория1',
-        //
-        //                     questions: [
-        //                         {
-        //                             questionId: 0,
-        //                             questionTitle: 'Сколько время на Марсе?'
-        //                         },
-        //                         {
-        //                             questionId: 1,
-        //                             questionTitle: 'Почему океан глубокий'
-        //                         },
-        //                         {
-        //                             questionId: 2,
-        //                             questionTitle: 'Сколько зубов у птиц'
-        //                         }
-        //                     ]
-        //                 }
-        //             ]
-        //         }
-        //     ]
-        // }
-    ]
+    isLoadingCourse: false,
+    courses: []
 };
 
 export default function course(state = initialState, action) {

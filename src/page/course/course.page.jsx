@@ -29,7 +29,7 @@ class CoursePage extends React.Component {
                 <footer className='footer'>
 
                     <Button
-                        text={'Добавить курс'}
+                        text={'Добавить опрос'}
                         handleClick={this.handleAddCourse}
                         style={'default'}
                     />
