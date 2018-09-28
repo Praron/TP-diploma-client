@@ -28,7 +28,8 @@ export default function login(state = initialState, action) {
                 ...state,
                 user: action.payload,
                 errorMsg: null,
-                isAuth: true
+                isAuth: true,
+                isLoading: false,
             };
         case LOG_OUT:
             return {
@@ -36,19 +37,24 @@ export default function login(state = initialState, action) {
                 user: null,
                 errorMsg: null,
                 isAuth: false,
+                isLoading: false,
             };
         case LOG_IN_FAILURE:
             return {
                 ...state,
                 errorMsg: action.payload,
                 isAuth: false,
+                isLoading: false,
             };
         case LOG_IN_ERROR_SERVER:
             return {
                 ...state,
                 isLoadingUser: false,
-                errorMsgUser: action.payload.errorMsg,
-                isAuth: false
+                errorMsg: action.payload,
+                isAuth: false,
+                isLoading: false,
             };
+        default:
+            return state;
     }
 }

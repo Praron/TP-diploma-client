@@ -2,7 +2,6 @@ import {
     VIDEO,
     INQUIRER,
     RESULT,
-    LOGOUT
 } from '../constants/routes-map.constant';
 
 export const MENU_ITEMS = [
@@ -26,11 +25,5 @@ export const MENU_ITEMS = [
     },
     {
         center: '_center'
-    },
-    {
-        text: 'Выход',
-        size: 'medium',
-        type: 'default',
-        pathTo: LOGOUT,
-    },
+    }
 ];
