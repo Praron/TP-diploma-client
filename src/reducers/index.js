@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux';
-import course from './course.reducer';
+import login from './login.reducer.js';
+import course from './course.reducer.js';
+import question from './question.reducer.js';
 
-const reducer = combineReducers({
-    course
+export default combineReducers({
+    login,
+    course,
+    question
 });
-
-export default reducer;

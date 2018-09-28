@@ -1,12 +1,17 @@
 import React from 'react';
-import './login.page.less';
+import {connect} from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
+import './login.page.less';
 import Button from '../../components/button/button.jsx';
 import Input from '../../components/input/input.jsx';
 
+import {logIn} from '../../actions/login.action';
+import {INQUIRER} from '../../constants/routes-map.constant';
+
 //TODO доделать вывод ошибок с сервера и ошибки формы
 
-export default class LoginPage extends React.Component {
+class LoginPage extends React.Component {
     constructor() {
         super();
 
@@ -22,7 +27,12 @@ export default class LoginPage extends React.Component {
 
     render() {
         const {email, password} = this.state;
+        const {errorMsg, isAuth} = this.props;
         const isDisabled = this.validate();
+
+        if (isAuth) {
+            return <Redirect to={INQUIRER} />;
+        }
 
         return (
             <div className='login'>
@@ -30,7 +40,9 @@ export default class LoginPage extends React.Component {
                     Добро пожаловать
                 </div>
                 <form className='login__form' onSubmit={this.handleSubmit}>
-
+                    <div className='login__form-error'>
+                        {errorMsg && <p>{errorMsg}</p>}
+                    </div>
                     <div className='login__form-input'>
                         <Input
                             type={'email'}
@@ -99,5 +111,21 @@ export default class LoginPage extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        const { email, password } = this.state;
+        this.props.logIn({email, password});
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        isAuth: state.login.isAuth,
+        errorMsg: state.login.errorMsg,
+        isLoading: state.login.isLoading
+    };
+}
+
+const mapDispatchToProps = (dispatch) => ({
+    logIn: (params) => dispatch(logIn(params))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

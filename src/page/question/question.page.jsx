@@ -1,19 +1,20 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
 import './question.page.less';
 import Input from '../../components/input/input.jsx';
 import Select from '../../components/select/select.jsx';
-import PropTypes from 'prop-types';
-import {question} from './initialSatetQuestion';
 
 import AnswerText from '../../components/answers/answer-text/answer-text.jsx';
 import AnswersImg from '../../components/answers/answers-img/answer-img.jsx';
 import AnswersItem from '../../components/answers/answers-item/answers-item.jsx';
 import Button from '../../components/button/button.jsx';
 
+import {getQuestion} from '../../actions/question.action.js';
 
-export default class QuestionPage extends React.Component {
-    constructor() {
-        super();
+class QuestionPage extends React.Component {
+    constructor(props) {
+        super(props);
 
         this.state = {
             isAnswerText: false,
@@ -23,10 +24,17 @@ export default class QuestionPage extends React.Component {
 
         this.handleSelect = this.handleSelect.bind(this);
         this.handleAnswerText = this.handleAnswerText.bind(this);
+
+    }
+
+    componentDidMount() {
+        this.props.getQuestion(this.props.match.params.id);
     }
 
     render() {
         const {isAnswerText, isAnswersImg, isAnswersItem} = this.state;
+
+        const {title, type, data} = this.props.questionData || {};
 
         return <div className='container'>
 
@@ -34,8 +42,8 @@ export default class QuestionPage extends React.Component {
                 <header className='question__header'>
                     <div className='question__header-input'>
                         <Input
-                            type={'Введите вопрос'}
-                            value={question.title}
+                            type={'text'}
+                            value={title || 'Введите вопрос'}
                         />
                     </div>
 
@@ -60,25 +68,26 @@ export default class QuestionPage extends React.Component {
                                 }
                             ]}
                             handleSelect={this.handleSelect}
-                            typeSelect={'checkbox'}
+                            typeSelect={type || 'checkbox'}
                         />
                     </div>
                 </header>
 
                 <main className='question__main'>
-
                     {
                         isAnswerText && <AnswerText
-                            handleAnswersText={this.handleAnswerText}
+                            handleAnswersText={this.handleAnswerText} // TODO доделать компонент
                         />
                     }
 
                     {
-                        isAnswersImg && <AnswersImg/>
+                        isAnswersImg && <AnswersImg/> // TODO доделать компонент
                     }
 
                     {
-                        isAnswersItem && <AnswersItem/>
+                        isAnswersItem && <AnswersItem
+                            data={data || []}
+                        />
                     }
 
                 </main>
@@ -150,7 +159,18 @@ export default class QuestionPage extends React.Component {
     }
 }
 
-QuestionPage.propTypes = {
-    match: PropTypes.object,
-};
+
+function mapStateToProps(state) {
+    return {
+        questionData: state.question.questionData,
+        errorMsgQuestion: state.question.errorMsgQuestion,
+        isLoadingQuestion: state.question.isLoadingQuestion
+    };
+}
+
+const mapDispatchToProps = (dispatch) => ({
+    getQuestion: (id) => dispatch(getQuestion(id))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionPage);
 

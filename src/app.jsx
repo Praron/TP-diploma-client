@@ -10,6 +10,8 @@ import NotFound from './components/not-found/not-found.jsx';
 import Header from './components/header/header.jsx';
 import QuestionPage from './page/question/question.page.jsx';
 
+import PrivateRoute from './components/private-route/private-route.jsx';
+
 const App = () => (
     <React.Fragment>
 
@@ -17,12 +19,15 @@ const App = () => (
 
         <div className='content'>
             <Switch>
-                <Route exact path='/' component={CoursePage}/>
-                <Route path='/video' component={VideoPage}/>
-                <Route path='/result' component={ResultPage}/>
+
+                <PrivateRoute exact path='/' component={CoursePage} />
+                <PrivateRoute path='/video' component={VideoPage} />
+                <PrivateRoute path='/result' component={ResultPage} />
+                <PrivateRoute exact path='/question/:id' component={QuestionPage} />
+
                 <Route path='/login' component={LoginPage}/>
-                <Route exact path='/question/:id' component={QuestionPage}/>
                 <Route component={NotFound}/>
+
             </Switch>
         </div>
 

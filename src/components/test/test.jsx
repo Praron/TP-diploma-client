@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import CourseHeader from '../course-header/course-header.jsx';
 import Card from '../card/card.jsx';
@@ -9,6 +9,9 @@ import './test.less';
 
 export default class Test extends React.Component {
     render() {
+        const {testTitle, timeLimit} = this.props;
+        const cardBlock = this._getCard();
+
         return (
             <div className='test'>
 
@@ -16,8 +19,9 @@ export default class Test extends React.Component {
 
                     <CourseHeader
                         titleLeft={'Tecт:'}
-                        placeholderLeft={'Название теста'}
+                        placeholderLeft={testTitle || 'Название теста'}
                         withPerion={false}
+                        limitTime={timeLimit}
                     />
 
                 </div>
@@ -29,16 +33,29 @@ export default class Test extends React.Component {
                     /> 
                 </div>
 
-                
                 <div className='test__card'>
 
-                    <Card/>
+                    {cardBlock}
 
                 </div>
                 
             </div>
         );
     }
+
+    _getCard() {
+        return this.props.categories.map(({categoryId, categoryTitle, questions}) => (
+           <Card
+                key={categoryId}
+                categoryTitle={categoryTitle}
+                questions={questions}
+           />
+        ));
+    }
 }
 
-Test.propTypes = {};
+Test.propTypes = {
+    testTitle: PropTypes.string,
+    timeLimit: PropTypes.string,
+    categories: PropTypes.array
+};
