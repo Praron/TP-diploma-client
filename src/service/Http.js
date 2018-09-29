@@ -1,8 +1,8 @@
 import {
     GET,
     POST,
-    PREFIX,
-    PORT
+    // PREFIX,
+    // PORT
 } from '../constants/api.constant';
 
 export default class Http {
@@ -19,7 +19,7 @@ export default class Http {
         const fetchOptions = {
             method: method,
             headers: {
-                'Content-Type': 'application/json; charset=utf-8',
+                'Content-Type': 'application/json',
             },
             mode: 'cors',
             credentials: 'include',
@@ -29,7 +29,7 @@ export default class Http {
             fetchOptions.body = JSON.stringify(data);
         }
 
-        return fetch(`${PREFIX}:${PORT}/${path}`, fetchOptions)
+        return fetch(`/${path}`, fetchOptions)
             .then(resp => resp.json());
     }
 }

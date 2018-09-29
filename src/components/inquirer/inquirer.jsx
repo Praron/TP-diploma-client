@@ -5,9 +5,19 @@ import CourseHeader from '../course-header/course-header.jsx';
 import Test from '../test/test.jsx';
 import Button from '../button/button.jsx';
 
-import './course.less';
+import './inquirer.less';
 
-export default class Course extends React.Component {
+export default class Inquirer extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            tests: this.props.tests,
+        };
+
+        this.handleAddTest = this.handleAddTest.bind(this);
+    }
+
     render() {
         const {inquirerTitle, inquirerStartTime, inquirerEndTime} = this.props;
 
@@ -19,7 +29,7 @@ export default class Course extends React.Component {
 
                     <CourseHeader
                         titleLeft={'Опросник:'}
-                        placeholderLeft={inquirerTitle || 'Название опросника:'}
+                        valueLeft={inquirerTitle || 'Название опросника:'}
                         withPeriod={true}
                         startTime={inquirerStartTime}
                         endTime={inquirerEndTime}
@@ -37,6 +47,7 @@ export default class Course extends React.Component {
                     <Button
                         text={'Добавить Тест'}
                         style={'default'}
+                        handleClick={this.handleAddTest}
                     />
                 </div>
 
@@ -44,8 +55,19 @@ export default class Course extends React.Component {
         );
     }
 
+    handleAddTest() {
+        this.setState({
+            tests: this.state.tests.concat({
+                testTitle: '',
+                timeLimit: '00:00:00',
+                categories: []
+            })
+        });
+    }
+
+
     _getTests() {
-        return this.props.tests.map(({testId, testTitle, timeLimit, categories}) => (
+        return this.state.tests.map(({testId, testTitle, timeLimit, categories}) => (
             <Test
                 key={testId}
                 testTitle={testTitle}
@@ -56,7 +78,7 @@ export default class Course extends React.Component {
     }
 }
 
-Course.propTypes = {
+Inquirer.propTypes = {
     inquirerTitle: PropTypes.string,
     inquirerStartTime: PropTypes.string,
     inquirerEndTime: PropTypes.string,

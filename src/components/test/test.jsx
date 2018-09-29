@@ -8,6 +8,16 @@ import Button from '../button/button.jsx';
 import './test.less';
 
 export default class Test extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.handleAddCategory = this.handleAddCategory.bind(this);
+
+        this.state = {
+            categories: this.props.categories,
+        };
+    }
+
     render() {
         const {testTitle, timeLimit} = this.props;
         const cardBlock = this._getCard();
@@ -19,7 +29,7 @@ export default class Test extends React.Component {
 
                     <CourseHeader
                         titleLeft={'Tecт:'}
-                        placeholderLeft={testTitle || 'Название теста'}
+                        valueLeft={testTitle || 'Название теста'}
                         withPerion={false}
                         limitTime={timeLimit}
                     />
@@ -30,6 +40,7 @@ export default class Test extends React.Component {
                     <Button
                         text={'Добавить категорию'}
                         style={'default'}
+                        handleClick={this.handleAddCategory}
                     /> 
                 </div>
 
@@ -43,12 +54,25 @@ export default class Test extends React.Component {
         );
     }
 
+    handleAddCategory() {
+        // this.state.categories.push({
+        //     categoryTitle: '',
+        //     questions: []
+        // });
+        this.setState({
+            categories: this.state.categories.concat({
+                categoryTitle: '',
+                questions: []
+            })
+        });
+    }
+
     _getCard() {
-        return this.props.categories.map(({categoryId, categoryTitle, questions}) => (
+        return this.state.categories.map(({categoryId, categoryTitle, questions}) => (
            <Card
                 key={categoryId}
                 categoryTitle={categoryTitle}
-                questions={questions}
+                questions={questions || []}
            />
         ));
     }
@@ -59,3 +83,5 @@ Test.propTypes = {
     timeLimit: PropTypes.string,
     categories: PropTypes.array
 };
+
+

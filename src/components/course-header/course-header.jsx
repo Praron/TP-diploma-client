@@ -4,10 +4,26 @@ import Input from '../input/input.jsx';
 import PropTypes from 'prop-types';
 
 export default class CourseHeader extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            inputTitle: this.props.valueLeft,
+            endTime: this.props.endTime,
+            startTime: this.props.startTime,
+            limitTime: this.props.limitTime,
+        };
+
+        this.onChangeInput = this.onChangeInput.bind(this);
+    }
+
 
     render() {
-        const {titleLeft, placeholderLeft, withPeriod, startTime, endTime, limitTime} = this.props;
-        const timeBlock = this._getTimeBlock(withPeriod, startTime, endTime, limitTime);
+        const {titleLeft, withPeriod} = this.props;
+        const {inputTitle} = this.state;
+
+        const timeBlock = this._getTimeBlock(withPeriod);
+
 
         return (
 
@@ -19,7 +35,10 @@ export default class CourseHeader extends React.Component {
 
                         <Input
                             type={'text'}
-                            placeholder={placeholderLeft}
+                            placeholder={'Введите название опросника'}
+                            value={inputTitle}
+                            handleChange={this.onChangeInput}
+                            fieldName={'inputTitle'}
                         />
 
                     </div>
@@ -31,9 +50,18 @@ export default class CourseHeader extends React.Component {
         );
     }
 
+    onChangeInput(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
 
-    _getTimeBlock(withPeriod, startTime, endTime, limitTime) {
-        console.log(limitTime);
+    _getTimeBlock(withPeriod) {
+
+        const {endTime, startTime, limitTime} = this.props;
+
+        console.log(endTime, startTime);
+
         if (withPeriod) {
             return (
                 <div className='course-header__time'>
@@ -42,14 +70,18 @@ export default class CourseHeader extends React.Component {
 
                     <Input
                         type={'date'}
-                        value={startTime}
+                        value={startTime ? startTime.substr(0, 10) : ''}
+                        handleChange={this.onChangeInput}
+                        fieldName={'startTime'}
                     />
 
                     <span className='course-header__text'>&nbsp;до&nbsp;</span>
 
                     <Input
                         type={'date'}
-                        value={endTime}
+                        value={endTime ? endTime.substr(0, 10) : ''}
+                        handleChange={this.onChangeInput}
+                        fieldName={'endTime'}
                     />
 
                 </div>
@@ -63,6 +95,8 @@ export default class CourseHeader extends React.Component {
                 <Input
                     type={'time'}
                     value={limitTime}
+                    handleChange={this.onChangeInput}
+                    fieldName={'limitTime'}
                 />
             </div>
         );
@@ -71,7 +105,7 @@ export default class CourseHeader extends React.Component {
 
 CourseHeader.propTypes = {
     titleLeft: PropTypes.string.isRequired,
-    placeholderLeft: PropTypes.string.isRequired,
+    valueLeft: PropTypes.string.isRequired,
     withPeriod: PropTypes.bool,
     startTime: PropTypes.string,
     endTime: PropTypes.string,

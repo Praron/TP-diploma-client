@@ -14,7 +14,8 @@ export default class Input extends React.Component {
                 data-field-name={fieldName}
                 onChange={handleChange}
                 placeholder={placeholder}
-                value={value}
+                defaultValue={value}
+                name={fieldName}
             />
         );
     }

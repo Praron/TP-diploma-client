@@ -1,25 +1,31 @@
 import React from 'react';
-import './course.page.less';
+import './inquirer.page.less';
 
 import Button from '../../components/button/button.jsx';
-import Course from '../../components/course/course.jsx';
-import {getCourse} from '../../actions/course.action';
+import Inquirer from '../../components/inquirer/inquirer.jsx';
+import {getInquirer} from '../../actions/inquirer.action';
 import {connect} from 'react-redux';
 
-class CoursePage extends React.Component {
+class InquirerPage extends React.Component {
     constructor(props) {
         super(props);
 
         this.handleClickSave = this.handleClickSave.bind(this);
         this.handleAddCourse = this.handleAddCourse.bind(this);
 
-        this.props.getCourse();
+
+        this.state = {
+            courses: this.props.courses || []
+        };
+    }
+
+    componentDidMount() {
+        this.props.getInquirer();
+        setTimeout(() => {this.setState({courses: this.props.courses});}, 300);
     }
 
     render() {
-        const {courses} = this.props;
-
-        const coursesBlock = this._getCourse(courses);
+        const coursesBlock = this._getCourse();
 
         return (
             <div className='container'>
@@ -45,23 +51,28 @@ class CoursePage extends React.Component {
         );
     }
 
-    _getCourse(courses) {
-        return courses.map(({inquirerId, inquirerTitle, inquirerStartTime, inquirerEndTime, tests}) => (
-            <Course
+    _getCourse() {
+        return this.state.courses.map(({inquirerId, inquirerTitle, inquirerStartDate, inquirerEndDate, tests}) => (
+            <Inquirer
                 key={inquirerId}
                 inquirerTitle={inquirerTitle}
-                inquirerStartTime={inquirerStartTime}
-                inquirerEndTime={inquirerEndTime}
+                inquirerStartTime={inquirerStartDate}
+                inquirerEndTime={inquirerEndDate}
                 tests={tests}
             />
         ));
     }
 
-    handleClickSave() {
-
+    handleAddCourse() {
+        this.setState({courses: this.state.courses.concat({
+            inquirerTitle: '',
+            inquirerStartTime: '2018-07-22',
+            inquirerEndTime: '2018-07-22',
+            tests: []
+        })});
     }
 
-    handleAddCourse() {
+    handleClickSave() {
 
     }
 }
@@ -74,7 +85,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getCourse: (params) => dispatch(getCourse(params))
+    getInquirer: (params) => dispatch(getInquirer(params))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CoursePage);
+export default connect(mapStateToProps, mapDispatchToProps)(InquirerPage);

@@ -5,7 +5,6 @@ import './card.less';
 
 import Input from '../input/input.jsx';
 import LinkButton from '../link-button/link-button.jsx';
-import Button from '../button/button.jsx';
 
 
 export default class Card extends React.Component {
@@ -32,10 +31,13 @@ export default class Card extends React.Component {
                 </ul>
 
                 <div className='card__button'>
-                    <Button
+
+                    <LinkButton
+                        to={'question'}
                         text={'Добавить вопрос'}
                         style={'default'}
                     />
+
                 </div>
 
             </div>
@@ -49,15 +51,16 @@ export default class Card extends React.Component {
     }
     
     _getListQuestion() {
-        return this.props.questions.map(({questionId, questionTitle}) =>
-            <li className='card__question-item' key={questionId}>
+        return this.props.questions.map(({questionId, questionTitle}) => {
+            console.log(questionId);
+            return <li className='card__question-item' key={questionId}>
                 <LinkButton
                     to={`question/${questionId}`}
                     text={this.getTruncateText(questionTitle, 40)}
                     style={'link'}
                 />
-            </li>
-        );
+            </li>;
+        });
     }
 }
 
