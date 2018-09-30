@@ -7,6 +7,8 @@ import Button from '../button/button.jsx';
 
 import './test.less';
 
+//TODO убрать state, добавить props
+
 export default class Test extends React.Component {
     constructor(props) {
         super(props);
@@ -41,7 +43,11 @@ export default class Test extends React.Component {
                         text={'Добавить категорию'}
                         style={'default'}
                         handleClick={this.handleAddCategory}
-                    /> 
+                    />
+                    <Button
+                        text={'Сохранить'}
+                        style={'success'}
+                    />
                 </div>
 
                 <div className='test__card'>
@@ -59,12 +65,14 @@ export default class Test extends React.Component {
         //     categoryTitle: '',
         //     questions: []
         // });
+
         this.setState({
             categories: this.state.categories.concat({
                 categoryTitle: '',
                 questions: []
             })
         });
+
     }
 
     _getCard() {

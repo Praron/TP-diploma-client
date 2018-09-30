@@ -49,6 +49,10 @@ export default class Inquirer extends React.Component {
                         style={'default'}
                         handleClick={this.handleAddTest}
                     />
+                    <Button
+                        text={'Сохранить'}
+                        style={'success'}
+                    />
                 </div>
 
             </div>

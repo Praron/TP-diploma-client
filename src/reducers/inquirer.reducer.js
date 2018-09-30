@@ -1,7 +1,8 @@
 import {
-    COURSE_REQUEST,
-    COURSE_SUCCESS,
-    COURSE_ERROR_SERVER
+    INQUIRER_REQUEST,
+    INQUIRER_SUCCESS,
+    INQUIRER_ERROR_SERVER,
+    INQUIRER_ADD
 } from './../actions/actions-types';
 
 const initialState = {
@@ -11,26 +12,31 @@ const initialState = {
 
 export default function course(state = initialState, action) {
     switch (action.type) {
-        case COURSE_REQUEST:
+        case INQUIRER_REQUEST:
             return {
                 ...state,
                 isLoadingCourse: true,
             };
 
-        case COURSE_SUCCESS:
+        case INQUIRER_SUCCESS:
             return {
                 ...state,
                 courses: action.payload,
                 isLoadingCourse: false
             };
 
-        case COURSE_ERROR_SERVER:
+        case INQUIRER_ERROR_SERVER:
             return {
                 ...state,
                 errorMsg: action.payload,
                 isLoadingCourse: false,
             };
-
+        case INQUIRER_ADD:
+            return {
+                ...state,
+                isLoadingCourse: false,
+                courses: state.courses.concat(action.payload)
+            };
         default:
             return state;
     }
