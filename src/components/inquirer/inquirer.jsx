@@ -68,8 +68,6 @@ export default class Inquirer extends React.Component {
     }
 
     onChangeHeaderInput(e) {
-        console.log(e.target.name, e.target.value);
-
         this.setState({
             [e.target.name]: e.target.value
         });
@@ -98,17 +96,18 @@ export default class Inquirer extends React.Component {
     }
 
     _getTests() {
-        const {handleAddCategory, inquirerId} = this.props;
+        const {handleAddCategory, inquirerId, handleSaveTest} = this.props;
 
         return this.props.tests.map(({testId, testTitle, timeLimit, categories}) => (
                 <Test
                     key={testId}
                     testTitle={testTitle}
-                    timeLimit={timeLimit}
+                    limitTime={timeLimit}
                     categories={categories}
                     handleAddCategory={handleAddCategory}
                     testId={testId + ''}
                     inquirerId={inquirerId}
+                    handleSaveTest={handleSaveTest}
                 />
             )
         );
@@ -123,5 +122,6 @@ Inquirer.propTypes = {
     handleAddTest: PropTypes.func,
     inquirerId: PropTypes.any,
     handleAddCategory: PropTypes.func,
-    handleSaveInquirer: PropTypes.func
+    handleSaveInquirer: PropTypes.func,
+    handleSaveTest: PropTypes.func
 };

@@ -10,7 +10,8 @@ import {
     addInquirer,
     addTest,
     addCategory,
-    saveInquirer
+    saveInquirer,
+    saveTest
 } from '../../actions/inquirer.action';
 import PropTypes from 'prop-types';
 
@@ -48,7 +49,7 @@ class InquirerPage extends React.Component {
     }
 
     _getCourse() {
-        const {addTest, addCategory, saveInquirer} = this.props;
+        const {addTest, addCategory, saveInquirer, saveTest} = this.props;
 
         return this.props.inquirers.map(({inquirerId, inquirerTitle, inquirerStartDate, inquirerEndDate, tests}) => (
                 <Inquirer
@@ -61,6 +62,7 @@ class InquirerPage extends React.Component {
                     inquirerId={inquirerId + ''}
                     handleAddCategory={addCategory}
                     handleSaveInquirer={saveInquirer}
+                    handleSaveTest={saveTest}
                 />
             )
         );
@@ -101,6 +103,8 @@ const mapDispatchToProps = (dispatch) => ({
     addInquirer: params => dispatch(addInquirer(params)),
     saveInquirer: (inquirerId, inquirerTitle, inquirerStartTime, inquirerEndTime) =>
         dispatch(saveInquirer(inquirerTitle, inquirerStartTime, inquirerEndTime)),
+    saveTest: (testId, testTitle, testLimit) =>
+        dispatch(saveTest(testId, testTitle, testLimit)),
     addTest: (params, inquirerId) => dispatch(addTest(params, inquirerId)),
     addCategory: (params, inquirerId, testId) => dispatch(addCategory(params, inquirerId, testId)),
 });
@@ -114,5 +118,6 @@ InquirerPage.propTypes = {
     getInquirer: PropTypes.func,
     inquirers: PropTypes.array,
     isLoading: PropTypes.bool,
-    saveInquirer: PropTypes.func
+    saveInquirer: PropTypes.func,
+    saveTest: PropTypes.func
 };

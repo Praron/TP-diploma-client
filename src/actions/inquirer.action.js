@@ -47,27 +47,34 @@ export const addCategorySuccess = (data, inquirerId, testId) => ({
 
 
 export function addCategory(data,inquirerId, testId) { //TODO
-    return (dispatch) => {
+    return dispatch => {
         dispatch(addCategorySuccess(data, inquirerId, testId));
     };
 }
 
 export function addTest(data, inquirerId) { //TODO
-    return (dispatch) => {
+    return dispatch => {
         dispatch(addTestSuccess(data, inquirerId));
     };
 }
 
 export function addInquirer(data) { //TODO
-    return (dispatch) => {
+    return dispatch => {
         dispatch(inquirerAdd(data));
     };
 }
 
 export function saveInquirer(inquirerTitle, inquirerStartTime, inquirerEndTime) { // TODO
-    return (dispatch) => {
+    return dispatch => {
         dispatch(inquirerRequest());
         console.log(inquirerTitle, inquirerStartTime, inquirerEndTime); // ели успех - getInquirer
+    };
+}
+
+export function saveTest(testId, testTitle, testLimit) {
+    return dispatch => {
+        dispatch(inquirerRequest());
+        console.log(testId, testTitle, testLimit); // ели успех - getInquirer
     };
 }
 

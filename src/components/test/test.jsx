@@ -13,11 +13,18 @@ export default class Test extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            valueLeft: this.props.testTitle,
+            limitTime: this.props.limitTime
+        };
+
         this.clickAddCategory = this.clickAddCategory.bind(this);
+        this.clickSaveTest = this.clickSaveTest.bind(this);
+        this.onChangeHeaderInput = this.onChangeHeaderInput.bind(this);
     }
 
     render() {
-        const {testTitle, timeLimit} = this.props;
+        const {valueLeft, limitTime} = this.state;
         const cardBlock = this._getCard();
 
         return (
@@ -27,10 +34,23 @@ export default class Test extends React.Component {
 
                     <InquirerHeader
                         titleLeft={'Tecт:'}
-                        valueLeft={testTitle || 'Название теста'}
+                        valueLeft={valueLeft || 'Название теста'}
                         withPerion={false}
-                        limitTime={timeLimit}
+                        limitTime={limitTime}
+                        handlerHeaderInput={this.onChangeHeaderInput}
                     />
+
+                    <Button
+                        text={'Сохранить данные теста'}
+                        handleClick={this.clickSaveTest}
+                        style={'success'}
+                    />
+
+                </div>
+
+                <div className='test__card'>
+
+                    {cardBlock}
 
                 </div>
 
@@ -41,22 +61,25 @@ export default class Test extends React.Component {
                         handleClick={this.clickAddCategory}
                     />
                     <Button
-                        text={'Сохранить'}
+                        text={'Сохранить данные категории'}
                         style={'success'}
                     />
                 </div>
-
-                <div className='test__card'>
-
-                    {cardBlock}
-
-                </div>
-                <Button
-                    text={'Сохранить данные теста'}
-                    style={'success'}
-                />
             </div>
         );
+    }
+
+    onChangeHeaderInput(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+
+    clickSaveTest() {
+        const testId = this.props.testId;
+        const {valueLeft, limitTime} = this.state;
+
+        this.props.handleSaveTest(testId, valueLeft, limitTime);
     }
 
     clickAddCategory() {
@@ -82,9 +105,10 @@ export default class Test extends React.Component {
 
 Test.propTypes = {
     testTitle: PropTypes.string,
-    timeLimit: PropTypes.string,
+    limitTime: PropTypes.string,
     categories: PropTypes.array,
     handleAddCategory: PropTypes.func,
+    handleSaveTest: PropTypes.func,
     testId: PropTypes.string,
     inquirerId: PropTypes.string
 };
