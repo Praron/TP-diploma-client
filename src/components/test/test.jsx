@@ -48,26 +48,21 @@ export default class Test extends React.Component {
 
                 </div>
 
-                <div className='test__card'>
-
-                    {cardBlock}
-
-                </div>
-
                 <div className='test__button'>
                     <Button
                         text={'Добавить категорию'}
                         style={'default'}
                         handleClick={this.clickAddCategory}
                     />
-                    <Button
-                        text={'Сохранить данные категории'}
-                        style={'success'}
-                    />
+                </div>
+
+                <div className='test__card'>
+                    {cardBlock}
                 </div>
             </div>
         );
     }
+
 
     onChangeHeaderInput(e) {
         this.setState({
@@ -76,10 +71,10 @@ export default class Test extends React.Component {
     }
 
     clickSaveTest() {
-        const testId = this.props.testId;
+        const {testId, inquirerId} = this.props;
         const {valueLeft, limitTime} = this.state;
 
-        this.props.handleSaveTest(testId, valueLeft, limitTime);
+        this.props.handleSaveTest(inquirerId, testId, valueLeft, limitTime);
     }
 
     clickAddCategory() {
@@ -93,11 +88,17 @@ export default class Test extends React.Component {
     }
 
     _getCard() {
+        const {inquirerId, testId, handleSaveCategory} = this.props;
+
         return this.props.categories.map(({categoryId, categoryTitle, questions}) => (
             <Card
                 key={categoryId + ''}
                 categoryTitle={categoryTitle}
                 questions={questions || []}
+                handleSaveCategory={handleSaveCategory}
+                testId={testId}
+                inquirerId={inquirerId}
+                categoryId={categoryId}
             />
         ));
     }
@@ -110,7 +111,8 @@ Test.propTypes = {
     handleAddCategory: PropTypes.func,
     handleSaveTest: PropTypes.func,
     testId: PropTypes.string,
-    inquirerId: PropTypes.string
+    inquirerId: PropTypes.string,
+    handleSaveCategory: PropTypes.func
 };
 
 

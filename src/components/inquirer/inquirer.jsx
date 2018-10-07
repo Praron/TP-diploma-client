@@ -74,8 +74,11 @@ export default class Inquirer extends React.Component {
     }
 
     handleSaveInquirer() {
-        const inquirerId = this.props.inquirerId;
+        const {inquirerId} = this.props;
         const {valueLeft, startTime, endTime} = this.state;
+
+        console.log('handleSaveInquirer');
+        console.log(inquirerId);
 
         this.props.handleSaveInquirer(inquirerId, valueLeft, startTime, endTime);
     }
@@ -96,7 +99,7 @@ export default class Inquirer extends React.Component {
     }
 
     _getTests() {
-        const {handleAddCategory, inquirerId, handleSaveTest} = this.props;
+        const {handleAddCategory, inquirerId, handleSaveTest, handleSaveCategory} = this.props;
 
         return this.props.tests.map(({testId, testTitle, timeLimit, categories}) => (
                 <Test
@@ -108,6 +111,7 @@ export default class Inquirer extends React.Component {
                     testId={testId + ''}
                     inquirerId={inquirerId}
                     handleSaveTest={handleSaveTest}
+                    handleSaveCategory={handleSaveCategory}
                 />
             )
         );
@@ -123,5 +127,6 @@ Inquirer.propTypes = {
     inquirerId: PropTypes.any,
     handleAddCategory: PropTypes.func,
     handleSaveInquirer: PropTypes.func,
-    handleSaveTest: PropTypes.func
+    handleSaveTest: PropTypes.func,
+    handleSaveCategory: PropTypes.func
 };

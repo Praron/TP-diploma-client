@@ -64,17 +64,24 @@ export function addInquirer(data) { //TODO
     };
 }
 
-export function saveInquirer(inquirerTitle, inquirerStartTime, inquirerEndTime) { // TODO
+export function saveInquirer(inquirerId, inquirerTitle, inquirerStartTime, inquirerEndTime) { // TODO
     return dispatch => {
         dispatch(inquirerRequest());
-        console.log(inquirerTitle, inquirerStartTime, inquirerEndTime); // ели успех - getInquirer
+        console.log(inquirerId, inquirerTitle, inquirerStartTime, inquirerEndTime); // ели успех - getInquirer
     };
 }
 
-export function saveTest(testId, testTitle, testLimit) {
+export function saveTest(inquirerId, testId, testTitle, testLimit) {
     return dispatch => {
         dispatch(inquirerRequest());
-        console.log(testId, testTitle, testLimit); // ели успех - getInquirer
+        console.log(inquirerId, testId, testTitle, testLimit); // ели успех - getInquirer
+    };
+}
+
+export function saveCategory(inquirerId, testId, categoryId, categoryTitle) {
+    return dispatch => {
+        dispatch(inquirerRequest());
+        console.log(inquirerId, testId, categoryId, categoryTitle);
     };
 }
 

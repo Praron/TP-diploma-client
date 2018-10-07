@@ -11,7 +11,8 @@ import {
     addTest,
     addCategory,
     saveInquirer,
-    saveTest
+    saveTest,
+    saveCategory
 } from '../../actions/inquirer.action';
 import PropTypes from 'prop-types';
 
@@ -49,7 +50,7 @@ class InquirerPage extends React.Component {
     }
 
     _getCourse() {
-        const {addTest, addCategory, saveInquirer, saveTest} = this.props;
+        const {addTest, addCategory, saveInquirer, saveTest, saveCategory} = this.props;
 
         return this.props.inquirers.map(({inquirerId, inquirerTitle, inquirerStartDate, inquirerEndDate, tests}) => (
                 <Inquirer
@@ -63,6 +64,7 @@ class InquirerPage extends React.Component {
                     handleAddCategory={addCategory}
                     handleSaveInquirer={saveInquirer}
                     handleSaveTest={saveTest}
+                    handleSaveCategory={saveCategory}
                 />
             )
         );
@@ -100,13 +102,18 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = (dispatch) => ({
     getInquirer: params => dispatch(getInquirer(params)),
+
     addInquirer: params => dispatch(addInquirer(params)),
     saveInquirer: (inquirerId, inquirerTitle, inquirerStartTime, inquirerEndTime) =>
-        dispatch(saveInquirer(inquirerTitle, inquirerStartTime, inquirerEndTime)),
-    saveTest: (testId, testTitle, testLimit) =>
-        dispatch(saveTest(testId, testTitle, testLimit)),
+        dispatch(saveInquirer(inquirerId,inquirerTitle, inquirerStartTime, inquirerEndTime)),
+
     addTest: (params, inquirerId) => dispatch(addTest(params, inquirerId)),
+    saveTest: (inquirerId, testId, testTitle, testLimit) =>
+        dispatch(saveTest(inquirerId, testId, testTitle, testLimit)),
+
     addCategory: (params, inquirerId, testId) => dispatch(addCategory(params, inquirerId, testId)),
+    saveCategory: (inquirerId, testId, categoryId, categoryTitle) =>
+        dispatch(saveCategory(inquirerId, testId, categoryId, categoryTitle)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(InquirerPage);
@@ -119,5 +126,6 @@ InquirerPage.propTypes = {
     inquirers: PropTypes.array,
     isLoading: PropTypes.bool,
     saveInquirer: PropTypes.func,
-    saveTest: PropTypes.func
+    saveTest: PropTypes.func,
+    saveCategory: PropTypes.func
 };
