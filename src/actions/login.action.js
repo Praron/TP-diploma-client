@@ -3,7 +3,9 @@ import {
     LOG_IN_SUCCESS,
     LOG_IN_FAILURE,
     LOG_OUT,
-    LOG_IN_ERROR_SERVER
+    LOG_IN_ERROR_SERVER,
+    USER_AUTH_SUCCESS,
+    USER_AUTH_ERROR
 } from './actions-types';
 
 //TODO соеденить с бэком, убрать комментарии
@@ -34,6 +36,23 @@ const loginServerError = (msg) => ({
 const logout = () => ({
     type:  LOG_OUT
 });
+
+const checkUserSuccess = () => ({
+    type: USER_AUTH_SUCCESS
+});
+
+const checkUserError = () => ({
+    type: USER_AUTH_ERROR
+});
+
+export function checkUser() {
+    return (dispatch) =>
+        Http.get('api/auth/me')
+            .then(() => {
+                    dispatch(checkUserSuccess());
+            })
+            .catch(err => dispatch(loginServerError(err)));
+}
 
 export function logIn({email, password}) {
     return (dispatch) => {
