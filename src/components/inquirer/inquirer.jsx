@@ -1,22 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import CourseHeader from '../course-header/course-header.jsx';
+import InquirerHeader from '../inquirer-header/inquirer-header.jsx';
 import Test from '../test/test.jsx';
 import Button from '../button/button.jsx';
 
 import './inquirer.less';
-import {generateId} from '../../service/generateID';
+import {generateId} from '../../service/generate-id';
 
 export default class Inquirer extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            valueLeft: this.props.inquirerTitle,
+            startTime: this.props.inquirerStartTime,
+            endTime: this.props.inquirerEndTime
+        };
+
         this.clickAddTest = this.clickAddTest.bind(this);
+        this.handleSaveInquirer = this.handleSaveInquirer.bind(this);
+        this.onChangeHeaderInput = this.onChangeHeaderInput.bind(this);
     }
 
     render() {
-        const {inquirerTitle, inquirerStartTime, inquirerEndTime} = this.props;
+        const {valueLeft, startTime, endTime} = this.state;
 
         const testsBlock = this._getTests();
 
@@ -24,12 +32,19 @@ export default class Inquirer extends React.Component {
             <div className='course'>
                 <header className='course__header'>
 
-                    <CourseHeader
+                    <InquirerHeader
                         titleLeft={'Опросник:'}
-                        valueLeft={inquirerTitle || 'Название опросника:'}
+                        valueLeft={valueLeft || 'Название опросника:'}
                         withPeriod={true}
-                        startTime={inquirerStartTime}
-                        endTime={inquirerEndTime}
+                        startTime={startTime}
+                        endTime={endTime}
+                        handlerHeaderInput={this.onChangeHeaderInput}
+                    />
+
+                    <Button
+                        text={'Сохранить данные опроса'}
+                        handleClick={this.handleSaveInquirer}
+                        style={'success'}
                     />
 
                 </header>
@@ -46,14 +61,25 @@ export default class Inquirer extends React.Component {
                         style={'default'}
                         handleClick={this.clickAddTest}
                     />
-                    <Button
-                        text={'Сохранить'}
-                        style={'success'}
-                    />
                 </div>
 
             </div>
         );
+    }
+
+    onChangeHeaderInput(e) {
+        console.log(e.target.name, e.target.value);
+
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+
+    handleSaveInquirer() {
+        const inquirerId = this.props.inquirerId;
+        const {valueLeft, startTime, endTime} = this.state;
+
+        this.props.handleSaveInquirer(inquirerId, valueLeft, startTime, endTime);
     }
 
     clickAddTest() {
@@ -71,18 +97,21 @@ export default class Inquirer extends React.Component {
         }, inquirerId);
     }
 
-
     _getTests() {
-        console.log('_getTests', this.props.tests);
+        const {handleAddCategory, inquirerId} = this.props;
 
         return this.props.tests.map(({testId, testTitle, timeLimit, categories}) => (
-            <Test
-                key={testId}
-                testTitle={testTitle}
-                timeLimit={timeLimit}
-                categories={categories}
-            />
-        ));
+                <Test
+                    key={testId}
+                    testTitle={testTitle}
+                    timeLimit={timeLimit}
+                    categories={categories}
+                    handleAddCategory={handleAddCategory}
+                    testId={testId + ''}
+                    inquirerId={inquirerId}
+                />
+            )
+        );
     }
 }
 
@@ -92,5 +121,7 @@ Inquirer.propTypes = {
     inquirerEndTime: PropTypes.string,
     tests: PropTypes.array,
     handleAddTest: PropTypes.func,
-    inquirerId: PropTypes.any
+    inquirerId: PropTypes.any,
+    handleAddCategory: PropTypes.func,
+    handleSaveInquirer: PropTypes.func
 };

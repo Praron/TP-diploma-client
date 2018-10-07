@@ -3,10 +3,11 @@ import {
     INQUIRER_SUCCESS,
     INQUIRER_ERROR_SERVER,
     INQUIRER_ADD,
-    TEST_ADD_SUCCESS
+    TEST_ADD_SUCCESS,
+    CATEGORY_ADD_SUCCESS
 } from './actions-types';
 
-import Http from '../service/Http';
+import Http from '../service/http';
 
 const inquirerRequest = () => ({
     type: INQUIRER_REQUEST,
@@ -35,15 +36,38 @@ const addTestSuccess = (data, inquirerId) => ({
     }
 });
 
-export function addTest(data, inquirerId) {
+export const addCategorySuccess = (data, inquirerId, testId) => ({
+   type: CATEGORY_ADD_SUCCESS,
+   payload: {
+       data,
+       inquirerId,
+       testId
+   }
+});
+
+
+export function addCategory(data,inquirerId, testId) { //TODO
+    return (dispatch) => {
+        dispatch(addCategorySuccess(data, inquirerId, testId));
+    };
+}
+
+export function addTest(data, inquirerId) { //TODO
     return (dispatch) => {
         dispatch(addTestSuccess(data, inquirerId));
     };
 }
 
-export function addInquirer(data) {
+export function addInquirer(data) { //TODO
     return (dispatch) => {
         dispatch(inquirerAdd(data));
+    };
+}
+
+export function saveInquirer(inquirerTitle, inquirerStartTime, inquirerEndTime) { // TODO
+    return (dispatch) => {
+        dispatch(inquirerRequest());
+        console.log(inquirerTitle, inquirerStartTime, inquirerEndTime); // ели успех - getInquirer
     };
 }
 
@@ -91,9 +115,7 @@ export function getInquirer() {
         //         },
         Http.get('api/admin/testing/inquirer')
             .then(res => {
-
                     console.log(res);
-
                     dispatch(inquirerSuccess(res));
             })
             .catch((err) => {

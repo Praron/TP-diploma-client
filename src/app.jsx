@@ -20,12 +20,12 @@ const App = () => (
         <div className='content'>
             <Switch>
 
-                <PrivateRoute exact path='/' component={CoursePage} />
-                <PrivateRoute path='/video' component={VideoPage} />
-                <PrivateRoute path='/result' component={ResultPage} />
-                <PrivateRoute exact path='/question/:id' component={QuestionPage} />
+                <PrivateRoute exact path='/' component={CoursePage}/>
+                <PrivateRoute path='/video' component={VideoPage}/>
+                <PrivateRoute path='/result' component={ResultPage}/>
+                <PrivateRoute exact path='/question/:id' component={QuestionPage}/>
 
-                <PrivateRoute exact path='/question' component={QuestionPage} />
+                <PrivateRoute exact path='/question' component={QuestionPage}/>
 
                 <Route path='/login' component={LoginPage}/>
                 <Route component={NotFound}/>

@@ -1,23 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import CourseHeader from '../course-header/course-header.jsx';
+import InquirerHeader from '../inquirer-header/inquirer-header.jsx';
 import Card from '../card/card.jsx';
 import Button from '../button/button.jsx';
 
 import './test.less';
+import {generateId} from '../../service/generate-id';
 
-//TODO убрать state, добавить props
 
 export default class Test extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handleAddCategory = this.handleAddCategory.bind(this);
-
-        this.state = {
-            categories: this.props.categories,
-        };
+        this.clickAddCategory = this.clickAddCategory.bind(this);
     }
 
     render() {
@@ -29,7 +25,7 @@ export default class Test extends React.Component {
 
                 <div className='test__header'>
 
-                    <CourseHeader
+                    <InquirerHeader
                         titleLeft={'Tecт:'}
                         valueLeft={testTitle || 'Название теста'}
                         withPerion={false}
@@ -37,12 +33,12 @@ export default class Test extends React.Component {
                     />
 
                 </div>
-                
+
                 <div className='test__button'>
                     <Button
                         text={'Добавить категорию'}
                         style={'default'}
-                        handleClick={this.handleAddCategory}
+                        handleClick={this.clickAddCategory}
                     />
                     <Button
                         text={'Сохранить'}
@@ -55,33 +51,31 @@ export default class Test extends React.Component {
                     {cardBlock}
 
                 </div>
-                
+                <Button
+                    text={'Сохранить данные теста'}
+                    style={'success'}
+                />
             </div>
         );
     }
 
-    handleAddCategory() {
-        // this.state.categories.push({
-        //     categoryTitle: '',
-        //     questions: []
-        // });
+    clickAddCategory() {
+        const {handleAddCategory, testId, inquirerId} = this.props;
 
-        this.setState({
-            categories: this.state.categories.concat({
-                categoryTitle: '',
-                questions: []
-            })
-        });
-
+        handleAddCategory({
+            categoryId: `${generateId()}`,
+            categoryTitle: '',
+            questions: []
+        }, inquirerId, testId);
     }
 
     _getCard() {
-        return this.state.categories.map(({categoryId, categoryTitle, questions}) => (
-           <Card
-                key={categoryId}
+        return this.props.categories.map(({categoryId, categoryTitle, questions}) => (
+            <Card
+                key={categoryId + ''}
                 categoryTitle={categoryTitle}
                 questions={questions || []}
-           />
+            />
         ));
     }
 }
@@ -89,7 +83,10 @@ export default class Test extends React.Component {
 Test.propTypes = {
     testTitle: PropTypes.string,
     timeLimit: PropTypes.string,
-    categories: PropTypes.array
+    categories: PropTypes.array,
+    handleAddCategory: PropTypes.func,
+    testId: PropTypes.string,
+    inquirerId: PropTypes.string
 };
 
 

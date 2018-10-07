@@ -49,10 +49,9 @@ export default class Card extends React.Component {
             text.slice(0, length - 3) + '...' :
             text;
     }
-    
+
     _getListQuestion() {
         return this.props.questions.map(({questionId, questionTitle}) => {
-            console.log(questionId);
             return <li className='card__question-item' key={questionId}>
                 <LinkButton
                     to={`question/${questionId}`}

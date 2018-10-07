@@ -5,13 +5,11 @@ import {
     LOG_OUT,
     LOG_IN_ERROR_SERVER,
     USER_AUTH_SUCCESS,
-    USER_AUTH_ERROR
+    // USER_AUTH_ERROR
 } from './actions-types';
 
-//TODO соеденить с бэком, убрать комментарии
-
 import checkResponse from '../service/check-response';
-import Http from '../service/Http';
+import Http from '../service/http';
 
 
 const loginRequest = () => ({
@@ -25,7 +23,7 @@ export const loginSuccess = (data) => ({
 
 const loginError = (msg) => ({
     type: LOG_IN_FAILURE,
-    payload: msg.message
+    payload: msg
 });
 
 const loginServerError = (msg) => ({
@@ -41,17 +39,18 @@ const checkUserSuccess = () => ({
     type: USER_AUTH_SUCCESS
 });
 
-const checkUserError = () => ({
-    type: USER_AUTH_ERROR
-});
+// const checkUserError = () => ({
+//     type: USER_AUTH_ERROR
+// });
 
 export function checkUser() {
     return (dispatch) =>
         Http.get('api/auth/me')
-            .then(() => {
-                    dispatch(checkUserSuccess());
+            .then((res) => {
+                console.log(res);
+                dispatch(checkUserSuccess());
             })
-            .catch(err => dispatch(loginServerError(err)));
+            .catch(() => dispatch(loginServerError('')));
 }
 
 export function logIn({email, password}) {
@@ -74,6 +73,12 @@ export function logIn({email, password}) {
 
 export function logOut() {
     return (dispatch) => {
-        dispatch(logout());
+        Http.post('api/auth/logout')
+            .then((res) => {
+                if (res.status === 'success') {
+                    dispatch(logout());
+                }
+            })
+            .catch(() => {});
     };
 }

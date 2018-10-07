@@ -35,7 +35,6 @@ class QuestionPage extends React.Component {
 
         const {questionTitle, questionType, answers} = this.props.questionData || {};
 
-
         return <div className='container'>
 
             <div className='question'>

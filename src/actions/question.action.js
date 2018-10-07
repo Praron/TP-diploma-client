@@ -4,7 +4,7 @@ import {
     QUESTION_ERROR_SERVER
 } from './actions-types';
 
-import Http from '../service/Http';
+import Http from '../service/http';
 
 const questionRequest = () => ({
     type: QUESTION_REQUEST,

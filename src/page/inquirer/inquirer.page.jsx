@@ -4,20 +4,23 @@ import './inquirer.page.less';
 import Button from '../../components/button/button.jsx';
 import Inquirer from '../../components/inquirer/inquirer.jsx';
 import {connect} from 'react-redux';
-import {generateId} from '../../service/generateID';
+import {generateId} from '../../service/generate-id';
 import {
     getInquirer,
     addInquirer,
-    addTest
+    addTest,
+    addCategory,
+    saveInquirer
 } from '../../actions/inquirer.action';
+import PropTypes from 'prop-types';
 
-//TODO убрать state, оставить пропс
 
 class InquirerPage extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handleAddCourse = this.handleAddCourse.bind(this);
+        this.handleAddInquirer = this.handleAddInquirer.bind(this);
+        this.handleSaveInquirer = this.handleSaveInquirer.bind(this);
     }
 
     componentDidMount() {
@@ -36,7 +39,7 @@ class InquirerPage extends React.Component {
 
                     <Button
                         text={'Добавить опрос'}
-                        handleClick={this.handleAddCourse}
+                        handleClick={this.handleAddInquirer}
                         style={'default'}
                     />
                 </footer>
@@ -45,20 +48,29 @@ class InquirerPage extends React.Component {
     }
 
     _getCourse() {
+        const {addTest, addCategory, saveInquirer} = this.props;
+
         return this.props.inquirers.map(({inquirerId, inquirerTitle, inquirerStartDate, inquirerEndDate, tests}) => (
-            <Inquirer
-                key={inquirerId}
-                inquirerTitle={inquirerTitle}
-                inquirerStartTime={inquirerStartDate}
-                inquirerEndTime={inquirerEndDate}
-                tests={tests}
-                handleAddTest={this.props.addTest}
-                inquirerId={inquirerId}
-            />
-        ));
+                <Inquirer
+                    key={inquirerId}
+                    inquirerTitle={inquirerTitle}
+                    inquirerStartTime={inquirerStartDate}
+                    inquirerEndTime={inquirerEndDate}
+                    tests={tests}
+                    handleAddTest={addTest}
+                    inquirerId={inquirerId + ''}
+                    handleAddCategory={addCategory}
+                    handleSaveInquirer={saveInquirer}
+                />
+            )
+        );
     }
 
-    handleAddCourse() {
+    handleSaveInquirer() {
+
+    }
+
+    handleAddInquirer() {
         this.props.addInquirer({
             inquirerId: `${generateId()}`,
             inquirerTitle: '',
@@ -85,9 +97,22 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getInquirer: (params) => dispatch(getInquirer(params)),
-    addInquirer: (params) => dispatch(addInquirer(params)),
-    addTest: (params, inquirerId) => dispatch(addTest(params, inquirerId))
+    getInquirer: params => dispatch(getInquirer(params)),
+    addInquirer: params => dispatch(addInquirer(params)),
+    saveInquirer: (inquirerId, inquirerTitle, inquirerStartTime, inquirerEndTime) =>
+        dispatch(saveInquirer(inquirerTitle, inquirerStartTime, inquirerEndTime)),
+    addTest: (params, inquirerId) => dispatch(addTest(params, inquirerId)),
+    addCategory: (params, inquirerId, testId) => dispatch(addCategory(params, inquirerId, testId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(InquirerPage);
+
+InquirerPage.propTypes = {
+    addCategory: PropTypes.func,
+    addTest: PropTypes.func,
+    addInquirer: PropTypes.func,
+    getInquirer: PropTypes.func,
+    inquirers: PropTypes.array,
+    isLoading: PropTypes.bool,
+    saveInquirer: PropTypes.func
+};
