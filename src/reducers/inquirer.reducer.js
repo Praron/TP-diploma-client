@@ -2,15 +2,28 @@ import {
     INQUIRER_REQUEST,
     INQUIRER_SUCCESS,
     INQUIRER_ERROR_SERVER,
-    INQUIRER_ADD
+    INQUIRER_ADD,
+    TEST_ADD_SUCCESS
 } from './../actions/actions-types';
 
 const initialState = {
     isLoadingCourse: false,
-    courses: []
+    inquirers: [
+        {
+            tests:[
+                {
+                    categories: [
+                        {
+                            questions: []
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
 };
 
-export default function course(state = initialState, action) {
+export default function inquirer(state = initialState, action) {
     switch (action.type) {
         case INQUIRER_REQUEST:
             return {
@@ -21,7 +34,7 @@ export default function course(state = initialState, action) {
         case INQUIRER_SUCCESS:
             return {
                 ...state,
-                courses: action.payload,
+                inquirers: action.payload,
                 isLoadingCourse: false
             };
 
@@ -35,8 +48,20 @@ export default function course(state = initialState, action) {
             return {
                 ...state,
                 isLoadingCourse: false,
-                courses: state.courses.concat(action.payload)
+                inquirers: state.inquirers.concat(action.payload)
             };
+        case TEST_ADD_SUCCESS: {
+            const {data, inquirerId} = action.payload;
+
+            const inquirerIndex = state.inquirers.findIndex(element => element.inquirerId === inquirerId);
+            state.inquirers[inquirerIndex].tests.push(data);
+
+            return {
+                ...state,
+                isLoadingCourse: false,
+                inquirers: [...state.inquirers]
+            };
+        }
         default:
             return state;
     }

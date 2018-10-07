@@ -6,16 +6,13 @@ import Test from '../test/test.jsx';
 import Button from '../button/button.jsx';
 
 import './inquirer.less';
+import {generateId} from '../../service/generateID';
 
 export default class Inquirer extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            tests: this.props.tests,
-        };
-
-        this.handleAddTest = this.handleAddTest.bind(this);
+        this.clickAddTest = this.clickAddTest.bind(this);
     }
 
     render() {
@@ -47,7 +44,7 @@ export default class Inquirer extends React.Component {
                     <Button
                         text={'Добавить Тест'}
                         style={'default'}
-                        handleClick={this.handleAddTest}
+                        handleClick={this.clickAddTest}
                     />
                     <Button
                         text={'Сохранить'}
@@ -59,19 +56,26 @@ export default class Inquirer extends React.Component {
         );
     }
 
-    handleAddTest() {
-        this.setState({
-            tests: this.state.tests.concat({
-                testTitle: '',
-                timeLimit: '00:00:00',
-                categories: []
-            })
-        });
+    clickAddTest() {
+        const {handleAddTest, inquirerId} = this.props;
+
+        handleAddTest({
+            testId: `${generateId()}`,
+            testTitle: '',
+            timeLimit: '00:00:00',
+            categories: [
+                {
+                    questions: []
+                }
+            ]
+        }, inquirerId);
     }
 
 
     _getTests() {
-        return this.state.tests.map(({testId, testTitle, timeLimit, categories}) => (
+        console.log('_getTests', this.props.tests);
+
+        return this.props.tests.map(({testId, testTitle, timeLimit, categories}) => (
             <Test
                 key={testId}
                 testTitle={testTitle}
@@ -86,5 +90,7 @@ Inquirer.propTypes = {
     inquirerTitle: PropTypes.string,
     inquirerStartTime: PropTypes.string,
     inquirerEndTime: PropTypes.string,
-    tests: PropTypes.array
+    tests: PropTypes.array,
+    handleAddTest: PropTypes.func,
+    inquirerId: PropTypes.any
 };

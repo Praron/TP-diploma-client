@@ -2,7 +2,8 @@ import {
     INQUIRER_REQUEST,
     INQUIRER_SUCCESS,
     INQUIRER_ERROR_SERVER,
-    INQUIRER_ADD
+    INQUIRER_ADD,
+    TEST_ADD_SUCCESS
 } from './actions-types';
 
 import Http from '../service/Http';
@@ -26,9 +27,17 @@ const inquirerAdd = (data) => ({
     payload: data
 });
 
-export function addTest() {
+const addTestSuccess = (data, inquirerId) => ({
+    type: TEST_ADD_SUCCESS,
+    payload: {
+        data,
+        inquirerId
+    }
+});
+
+export function addTest(data, inquirerId) {
     return (dispatch) => {
-        dispatch(inquirerRequest());
+        dispatch(addTestSuccess(data, inquirerId));
     };
 }
 
