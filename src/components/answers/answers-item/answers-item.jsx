@@ -20,14 +20,22 @@ export default class AnswersItem extends React.Component {
     }
 
     _getItem() {
-        return this.props.data.map(({answerId, answerTitle}) => (
-            <div className='answer-items' key={answerId}>
+            return this.props.answers.map(({answerId, answerTitle, answerScore}, index) => (
+            <div className='answer-items' key={answerId || index}>
 
                 <div className='answer-items__input'>
                     <Input
                         type={'text'}
                         placeholder={'Введите вариант ответа'}
-                        value={answerTitle}
+                        value={answerTitle || 'Введите вариант ответа'}
+                    />
+                </div>
+
+                <div className='answer-items__score'>
+                    <Input
+                        type={'text'}
+                        placeholder={'Балл'}
+                        value={ answerScore || 'Балл'}
                     />
                 </div>
 
@@ -50,5 +58,5 @@ export default class AnswersItem extends React.Component {
 }
 
 AnswersItem.propTypes = {
-    data: PropTypes.array
+    answers: PropTypes.array
 };

@@ -8,7 +8,6 @@ import Select from '../../components/select/select.jsx';
 import AnswerText from '../../components/answers/answer-text/answer-text.jsx';
 import AnswersImg from '../../components/answers/answers-img/answer-img.jsx';
 import AnswersItem from '../../components/answers/answers-item/answers-item.jsx';
-import Button from '../../components/button/button.jsx';
 
 import {getQuestion} from '../../actions/question.action.js';
 
@@ -34,7 +33,7 @@ class QuestionPage extends React.Component {
     render() {
         const {isAnswerText, isAnswersImg, isAnswersItem} = this.state;
 
-        const {title, type, data} = this.props.questionData || {};
+        const {questionTitle, questionType, answers} = this.props.questionData || {};
 
         return <div className='container'>
 
@@ -43,7 +42,7 @@ class QuestionPage extends React.Component {
                     <div className='question__header-input'>
                         <Input
                             type={'text'}
-                            value={title || 'Введите вопрос'}
+                            value={questionTitle || 'Введите вопрос'}
                         />
                     </div>
 
@@ -68,7 +67,7 @@ class QuestionPage extends React.Component {
                                 }
                             ]}
                             handleSelect={this.handleSelect}
-                            typeSelect={type || 'checkbox'}
+                            typeSelect={questionType || 'checkbox'}
                         />
                     </div>
                 </header>
@@ -86,29 +85,11 @@ class QuestionPage extends React.Component {
 
                     {
                         isAnswersItem && <AnswersItem
-                            data={data || []}
+                            answers={answers || []}
                         />
                     }
 
                 </main>
-
-                <footer className='question__footer'>
-                    <div className='question__footer-button'>
-                        <Button
-                            text={'Отменить'}
-                            style={'danger'}
-                        />
-                    </div>
-
-                    <div className='question__footer-button'>
-                        <Button
-                            text={'Сохранить'}
-                            style={'success'}
-                        />
-                    </div>
-
-                </footer>
-
             </div>
 
 
