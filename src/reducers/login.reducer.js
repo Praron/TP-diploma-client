@@ -3,9 +3,7 @@ import {
     LOG_IN_SUCCESS,
     LOG_IN_FAILURE,
     LOG_OUT,
-    LOG_IN_ERROR_SERVER,
-    USER_AUTH_SUCCESS,
-    USER_AUTH_ERROR
+    LOG_IN_ERROR_SERVER
 } from '../actions/actions-types';
 
 const initialState = {
@@ -55,16 +53,6 @@ export default function login(state = initialState, action) {
                 errorMsg: action.payload,
                 isAuth: false,
                 isLoading: false,
-            };
-        case USER_AUTH_SUCCESS:
-            return {
-                ...state,
-                isAuth: true,
-            };
-        case USER_AUTH_ERROR:
-            return {
-                ...state,
-                isAuth: false
             };
         default:
             return state;
