@@ -1,0 +1,88 @@
+@import '../../assets/style/font';
+@import '../../assets/style/color';
+
+
+.button {
+  padding: 0 16px;
+
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+  border: none;
+  outline: none;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &:disabled {
+    background: @color-button-disabled !important;
+  }
+
+  &__text {
+    text-decoration: none;
+    white-space: nowrap;
+    color: @color-button-text;
+  }
+
+  &._small {
+    height: 25px;
+    font-size: @size-x-small;
+  }
+
+  &._medium {
+    height: 32px;
+    font-size: @size-medium;
+  }
+
+  &._large {
+    height: 40px;
+    font-size: @size-x-large;
+  }
+
+  &._default {
+    background-color: @button-default;
+
+    &:hover {
+      background-color: @button-default-hover;
+    }
+  }
+
+  &._danger {
+    background-color: @button-danger;
+
+    &:hover {
+      background-color: @button-danger-hover;
+    }
+  }
+
+  &._success {
+    background-color: @button-success;
+
+    &:hover {
+      background-color: @button-success-hover;
+    }
+  }
+
+  &._long {
+    width: 100%;
+    border-radius: 0 0 10px 10px;
+    margin-bottom: 10px;
+  }
+
+  &._hidden {
+    dislay: none;
+  }
+
+  &._link > span, &._link {
+    padding: 0;
+    border-radius: 0;
+    color: @color-button-link;
+    background-color: white;
+
+    &:hover {
+     color: @color-button-link-hover;
+    }
+  }
+
+}
