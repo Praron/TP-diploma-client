@@ -1,0 +1,36 @@
+@import '../../assets/style/color';
+
+.input {
+  padding: 5px 15px;
+  border: 1px solid @input-border;
+  background-color: @input-background;
+  outline: none;
+  height: 25px;
+
+  &:focus {
+    border: 1px solid @input-border-focus;
+  }
+
+  &._transparent {
+    background: transparent;
+    border: transparent;
+    font-size: 25px;
+    
+    &::placeholder {
+      color: @input-transparent-background-placeholder;
+      opacity: 1;
+    }
+
+    &:focus {
+      background: @input-transparent-background-focus;
+      border: transparent;
+      border-radius: 5px;
+
+      &::placeholder {
+        color: @input-transparent-background-focus-placeholder;
+        opacity: 1;
+      }
+    }
+  }
+
+}
